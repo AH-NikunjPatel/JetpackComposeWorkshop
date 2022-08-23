@@ -104,43 +104,6 @@ fun DashboardScreen(navController: NavController) {
         })
 }
 
-@Composable
-fun loadPicture(
-    url: String,
-    @DrawableRes defaultImage: Int
-): MutableState<Bitmap?> {
-
-    val bitmapState: MutableState<Bitmap?> = mutableStateOf(null)
-    Glide.with(LocalContext.current)
-        .asBitmap()
-        .load(defaultImage)
-        .into(object : CustomTarget<Bitmap>() {
-            override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                bitmapState.value = resource
-            }
-
-            override fun onLoadCleared(placeholder: Drawable?) {
-
-            }
-
-        })
-
-    Glide.with(LocalContext.current)
-        .asBitmap()
-        .load(url)
-        .into(object : CustomTarget<Bitmap>() {
-            override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                bitmapState.value = resource
-            }
-
-            override fun onLoadCleared(placeholder: Drawable?) {
-
-            }
-
-        })
-    return bitmapState
-}
-
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -287,53 +250,6 @@ fun PropertyListingCard(navController: NavController,item: PropertyResult) {
                 )
             }
         }
-    }
-}
-
-
-@OptIn(ExperimentalMaterialApi::class)
-@Composable
-private fun MaterialCard(item: PropertyResult) {
-    var image by remember {
-        mutableStateOf(item.media.first().image_url)
-    }
-    var address by remember {
-        mutableStateOf(item.address)
-    }
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(250.dp)
-            .padding(16.dp),
-        backgroundColor = Color.White,
-        elevation = 5.dp,
-        onClick = {
-
-        }
-    ) {
-
-        Column() {
-            val painter = rememberAsyncImagePainter(image)
-            Image(
-                painter = painter,
-                contentDescription = "Property Image",
-                contentScale = ContentScale.FillWidth,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .fillMaxHeight(0.6f),
-
-                )
-            Text(
-                text = address,
-                fontSize = 14.sp,
-                fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Start,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 8.dp)
-            )
-        }
-
     }
 }
 

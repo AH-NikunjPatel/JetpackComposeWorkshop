@@ -19,7 +19,6 @@ class DashboardViewModel() : ViewModel() {
     val state: StateFlow<List<PropertyResult>>
         get() = _state
 
-    var propertyListResponse: List<PropertyResult> by mutableStateOf(listOf())
     var errorMessage: String by mutableStateOf("")
 
     fun getPropertyList() {

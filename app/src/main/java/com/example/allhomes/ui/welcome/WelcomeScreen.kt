@@ -90,21 +90,6 @@ fun WelcomeScreen(navController: NavController){
                 fontFamily = FontFamily.SansSerif,
                 fontWeight = FontWeight.Bold
             )
-//            Image(
-//                painter = painterResource(id = R.drawable.launch_logo),
-//                contentDescription = "logo",
-//                modifier = Modifier.scale(scale.value)
-//            )
-//            Spacer(modifier = Modifier.height(10.dp))
-//            Text(
-//                modifier = Modifier.scale(scale.value),
-//                text = "Domain Group",
-//                color = Color.Green,
-//                fontSize = 13.sp,
-//                fontWeight = FontWeight.Bold,
-//                fontStyle = FontStyle.Italic
-//
-//            )
         }
     }
 }
