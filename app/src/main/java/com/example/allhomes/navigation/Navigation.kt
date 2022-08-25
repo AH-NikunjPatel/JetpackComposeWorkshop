@@ -8,6 +8,7 @@ import com.example.allhomes.model.PropertyResult
 import com.example.allhomes.ui.dashboard.DashboardScreen
 import com.example.allhomes.ui.dashboard.DashboardViewModel
 import com.example.allhomes.ui.detail.DetailScreen
+import com.example.allhomes.ui.login.LoginScreen
 import com.example.allhomes.ui.welcome.WelcomeScreen
 
 @Composable
@@ -16,6 +17,10 @@ fun Navigation() {
     NavHost(navController = navController, startDestination = Screen.WelcomeScreen.route){
         composable( route = Screen.WelcomeScreen.route){
             WelcomeScreen(navController = navController)
+        }
+
+        composable( route = Screen.LoginScreen.route){
+            LoginScreen(navController = navController)
         }
 
         composable( route = Screen.DashboardScreen.route){

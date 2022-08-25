@@ -45,7 +45,7 @@ fun WelcomeScreen(navController: NavController){
             )
         )
         delay(3000)
-        navController.navigate(Screen.DashboardScreen.route)
+        navController.navigate(Screen.LoginScreen.route)
     }
     Box(
         contentAlignment = Alignment.Center,
