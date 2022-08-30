@@ -41,67 +41,70 @@ import com.bumptech.glide.request.transition.Transition
 import com.example.allhomes.R
 import com.example.allhomes.model.PropertyResult
 import com.example.allhomes.navigation.Screen
+import com.example.allhomes.ui.theme.AllhomesTheme
 
 @Composable
 fun DashboardScreen(navController: NavController) {
     val dashboardViewModel = viewModel(modelClass = DashboardViewModel::class.java)
     dashboardViewModel.getPropertyList()
     val state by dashboardViewModel.state.collectAsState()
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = {
-                    Text(text = buildAnnotatedString {
-                        withStyle(
-                            style = SpanStyle(
-                                color = Color.Red
-                            )
-                        ){
-                            append("allhome")
+    AllhomesTheme() {
+        Scaffold(
+            topBar = {
+                TopAppBar(
+                    title = {
+                        Text(text = buildAnnotatedString {
+                            withStyle(
+                                style = SpanStyle(
+                                    color = Color.Red
+                                )
+                            ){
+                                append("allhome")
+                            }
+                            append(" - ")
+                            withStyle(
+                                style = SpanStyle(
+                                    color = MaterialTheme.colors.primary
+                                )
+                            ){
+                                append("Domain Group")
+                            }
+                        })
+                    },
+                    navigationIcon = {
+                        IconButton(onClick = {}) {
+                            Icon(Icons.Filled.List, "backIcon")
                         }
-                        append(" - ")
-                        withStyle(
-                            style = SpanStyle(
-                                color = Color.Green
-                            )
-                        ){
-                            append("Domain Group")
-                        }
-                    })
-                },
-                navigationIcon = {
-                    IconButton(onClick = {}) {
-                        Icon(Icons.Filled.List, "backIcon")
-                    }
-                },
-                backgroundColor = Color.White,
-                contentColor = Color.Black,
-                elevation = 10.dp
-            )
-        }, content = {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(Color.White),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-
-                LazyColumn(
+                    },
+                    backgroundColor = Color.White,
+                    contentColor = Color.Black,
+                    elevation = 10.dp
+                )
+            }, content = {
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(Color.White),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    itemsIndexed(
-                        state
-                    ) { _, item ->
-                        PropertyListingCard(
-                            navController = navController,
-                            item = item
-                        )
+
+                    LazyColumn(
+                    ) {
+                        itemsIndexed(
+                            state
+                        ) { _, item ->
+                            PropertyListingCard(
+                                navController = navController,
+                                item = item
+                            )
+                        }
+
                     }
-
                 }
-            }
 
-        })
+            })
+    }
 }
 
 
@@ -121,7 +124,8 @@ fun PropertyListingCard(navController: NavController,item: PropertyResult) {
                 Card(
                     modifier = Modifier
                         .padding(top = 16.dp)
-                        .fillMaxWidth(),
+                        .fillMaxWidth()
+                        .height(200.dp),
                     elevation = 4.dp,
                     shape = RoundedCornerShape(10.dp)
                 ) {
@@ -136,8 +140,16 @@ fun PropertyListingCard(navController: NavController,item: PropertyResult) {
                     if (painter.state is AsyncImagePainter.State.Loading) {
                         CircularProgressIndicator(
                             modifier = Modifier
-                                .height(10.dp),
-                            color = Color.Red
+                                .padding(50.dp)
+                                .padding(
+                                    start = 50.dp,
+                                    top = 50.dp,
+                                    bottom = 50.dp,
+                                    end = 50.dp
+                                )
+                                .width(100.dp)
+                                .height(100.dp),
+                            color = Color.Green
                         )
                     }
                     Image(
@@ -189,7 +201,7 @@ fun PropertyListingCard(navController: NavController,item: PropertyResult) {
                             text = buildAnnotatedString {
                                 withStyle(
                                     style = SpanStyle(
-                                        color = Color.Black
+                                        color = MaterialTheme.colors.primary
                                     )
                                 ) {
                                     append("Bed ${item.getBedCount()}")
@@ -206,7 +218,7 @@ fun PropertyListingCard(navController: NavController,item: PropertyResult) {
                             text = buildAnnotatedString {
                                 withStyle(
                                     style = SpanStyle(
-                                        color = Color.Black
+                                        color = MaterialTheme.colors.primary
                                     )
                                 ) {
                                     append("Bath ${item.getBathCount()}")
@@ -223,7 +235,7 @@ fun PropertyListingCard(navController: NavController,item: PropertyResult) {
                             text = buildAnnotatedString {
                                 withStyle(
                                     style = SpanStyle(
-                                        color = Color.Black
+                                        color = MaterialTheme.colors.primary
                                     )
                                 ) {
                                     append("Car ${item.getCarCount()}")
